@@ -10,6 +10,8 @@ BLOCK_SIZE = 16  # Bytes
 pad = lambda s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * \
                 chr(BLOCK_SIZE - len(s) % BLOCK_SIZE)
 unpad = lambda s: s[:-ord(s[len(s) - 1:])]
+
+# Random 256-bit key
 random_key = os.urandom(32)
 
 
@@ -35,9 +37,7 @@ class AESCipher:
         return unpad(cipher.decrypt(enc)).decode('utf8')
 
 
-
 # MAIN
-
 # msg = input('Message...: ')
 # # pwd = input('Password..: ')
 #
@@ -66,7 +66,6 @@ for line in fileRead:
         # print(word)
         fileWrite.write(AESCipher(random_key).encrypt(word).decode("utf-8") + " ")
     fileWrite.write("\n")
-
 
 fileWrite.close()
 
